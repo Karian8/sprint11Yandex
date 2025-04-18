@@ -1,0 +1,28 @@
+---
+# tasks file for nginx_custom
+
+- name: Установка Nginx 
+  apt:
+    name: "nginx"
+    state: present
+
+- name: Подмена веб-страницы vm1
+  ansible.builtin.template:
+    src: index.j2
+    dest: /var/www/html/index.nginx-debian.html
+  when: "'workvm1' in inventory_hostname" # Выполнится только тогда, когда в имени есть workvm1
+  notify: "Nginx Reloader"
+
+- name: Подмена веб-страницы vm2
+  ansible.builtin.template:
+    src: index.j2
+    dest: /var/www/html/index.nginx-debian.html
+  when: "'workvm2' in inventory_hostname" # Выполнится только тогда, когда в имени есть workvm2  
+  notify: "Nginx Reloader"
+
+#- name: Настройка проксирования на отдающие машины
+ # ansible.builtin.template:
+  #  src: nginx-conf.j2
+   # dest: /etc/nginx/nginx.conf
+  #when : "'workvm3' in inventory_hostname"
+  #notify: "Nginx Reloader"

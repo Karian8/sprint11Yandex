@@ -1,0 +1,19 @@
+---
+linux: #Группа хостов 
+  children: #Обозначение, что будет подгруппа хостов
+    nginx: #Имя подгруппы хостов
+      hosts: #Узлы группы
+        workvm1: #Имя машины
+          ansible_host: 84.201.160.87 #Адрес машины
+        workvm2:
+          ansible_host: 158.160.8.111
+        workvm3:
+          ansible_host: 158.160.28.165
+  vars: #Переменные, доступные или используемые для всех подгрупп
+    ansible_user: "ansible"
+#    ansible_password: "qwerty!123"
+    connection_protocol: ssh #Тип подключения
+    ansible_become: true #Становиться ли другим пользователем после подключения
+    ansible_become_user: root #Становится рутом
+    ansible_become_method: sudo #Используя sudo
+#    ansible_become_flags: '-s /bin/sh'

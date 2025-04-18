@@ -1,0 +1,7 @@
+---
+# vars file for nginx_custom
+
+vm_nginx:
+  - workvm1
+  - workvm2
+
